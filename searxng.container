@@ -1,0 +1,12 @@
+[Container]
+Image=docker.io/searxng/searxng:latest
+
+PublishPort=60000:8080
+Volume=%h/data/files/searxng/settings:/etc/searxng/settings:Z
+
+[Service]
+Restart=on-failure
+TimeoutStartSec=900
+
+[Install]
+WantedBy=default.target
