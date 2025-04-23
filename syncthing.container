@@ -1,0 +1,18 @@
+[Container]
+Image=docker.io/syncthing/syncthing:latest
+
+AutoUpdate=registry
+Network=host
+HostName=st-%H
+UserNS=keep-id
+Environment=PUID=%U PGID=%G
+SecurityLabelDisable=true
+Volume=%h/.config/syncthing:/var/syncthing/config
+Volume=%h/data/syncthing/share1:/var/syncthing/share1
+
+[Service]
+TimeoutStartSec=900
+Restart=always
+
+[Install]
+WantedBy=default.target
