@@ -1,0 +1,15 @@
+[Container]
+Image=docker.io/vaultwarden/server:latest
+
+AutoUpdate=registry
+Network=host
+HostName=vw-%H
+EnvironmentFile=%h/vaultwarden/.env
+Volume=%h/vaultwarden/data:/data:Z
+
+[Service]
+TimeoutStartSec=900
+Restart=always
+
+[Install]
+WantedBy=default.target
