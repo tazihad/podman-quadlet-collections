@@ -1,0 +1,18 @@
+[Container]
+Image=docker.io/p3terx/aria2-pro:latest
+
+AutoUpdate=registry
+PublishPort=6800:6800
+PublishPort=6888:6888
+PublishPort=6888:6888/udp
+Environment=RPC_SECRET=123456 RPC_PORT=6800 LISTEN_PORT=6888
+SecurityLabelDisable=true
+Volume=%h/.config/aria2:/config
+Volume=%h/data/Downloads:/downloads
+
+[Service]
+TimeoutStartSec=900
+Restart=on-failure
+
+[Install]
+WantedBy=default.target
