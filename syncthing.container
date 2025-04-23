@@ -13,6 +13,8 @@ Volume=%h/data/syncthing/share1:/var/syncthing/share1
 [Service]
 TimeoutStartSec=900
 Restart=always
+ExecStartPre=/usr/bin/mkdir -p %h/.config/syncthing
+ExecStartPre=/usr/bin/mkdir -p %h/data/syncthing/share1
 
 [Install]
 WantedBy=default.target
