@@ -1,0 +1,30 @@
+[Container]
+Image=docker.io/rclone/rclone:latest
+
+AutoUpdate=registry
+Exec=bisync "gdrive:/" "/data/gdrive" \
+--log-level ERROR \
+--log-file /root/.cache/rclone/rclone.log \
+--filters-file /config/rclone/exclude-filterlist \
+--create-empty-src-dirs \
+--compare size,modtime,checksum \
+--fix-case \
+--check-access \
+--drive-acknowledge-abuse \
+--progress \
+--metadata \
+--resilient \
+--max-lock 2m \
+--recover
+
+SecurityLabelDisable=true
+Volume=%h/data/sync/rclone-config:/config/rclone
+Volume=%h/data/sync/rclone-cache:/root/.cache/rclone
+Volume=%h/data/sync/gdrive/:/data/gdrive
+
+[Service]
+TimeoutStartSec=900
+Restart=on-failure
+
+[Install]
+WantedBy=default.target
